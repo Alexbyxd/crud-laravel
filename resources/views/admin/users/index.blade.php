@@ -7,17 +7,16 @@
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Primary</h3>
+                <h3 class="card-title">Lista de Usuarios</h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
+                    <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="bi bi-person-fill-add"></i>Nuevo
+                        Usuario</a>
                 </div>
 
             </div>
 
             <div class="card-body">
-                <table class="table table-sm table-striped table-hover table-bordered">
+                <table class="table table-sm table-striped table-hover table-bordered text-center">
                     <thead>
                         <tr>
                             <th>Nro</th>
@@ -29,11 +28,19 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->email}}</td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="{{route('users.show',$user->id)}}" type="button" class="btn btn-info">Show</a>
+                                        <button type="button" class="btn btn-success">Edit</button>
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>

@@ -17,3 +17,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->middleware('auth');
+Route::post('/users',[UserController::class,'store'])->name('users.store')->middleware('auth');
+Route::get('/users/{id}',[UserController::class,'show'])->name('users.show')->middleware('auth');
