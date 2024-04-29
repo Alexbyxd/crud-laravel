@@ -20,3 +20,6 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index')->mid
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create')->middleware('auth');
 Route::post('/users',[UserController::class,'store'])->name('users.store')->middleware('auth');
 Route::get('/users/{id}',[UserController::class,'show'])->name('users.show')->middleware('auth');
+Route::get('/users/{id}/update',[UserController::class,'edit'])->name('users.edit')->middleware('auth');
+//put es para actualizar datos
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update')->middleware('auth');

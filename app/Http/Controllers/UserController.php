@@ -73,17 +73,31 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.update', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        //con request leemos los datos que vienen del formulario
+        //estamos validando la informacion que viene del formulario
+        $request->validate([
+            'name' => 'required|max:100', //required significa que no puede estar vacio
+            'email' => 'required|unique:users', //valida si un email es unico en la tabla users
+            'password' => 'required|confirmed', //valida la contraseña y si se confirma
+        ]);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user -> save();
+
+        return redirect()->route('users.index');
     }
 
     /**

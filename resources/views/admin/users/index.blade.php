@@ -26,15 +26,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        //contador para las lista
+                            $counter = 0 ;
+                        @endphp
                         @foreach ($users as $user)
+                        @php
+                            $counter++;
+                        @endphp
                             <tr>
-                                <td>{{ $user->id }}</td>
+                                <td>{{ $counter }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <a href="{{route('users.show',$user->id)}}" type="button" class="btn btn-info">Show</a>
-                                        <button type="button" class="btn btn-success">Edit</button>
+                                        <a href="{{route('users.edit',$user->id)}}" type="button" class="btn btn-success">Edit</a>
                                         <button type="button" class="btn btn-danger">Delete</button>
                                     </div>
                                 </td>
