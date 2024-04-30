@@ -33,6 +33,7 @@
                         @foreach ($users as $user)
                         @php
                             $counter++;
+                            $id = $user -> id;
                         @endphp
                             <tr>
                                 <td>{{ $counter }}</td>
@@ -40,9 +41,33 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{route('users.show',$user->id)}}" type="button" class="btn btn-info">Show</a>
-                                        <a href="{{route('users.edit',$user->id)}}" type="button" class="btn btn-success">Edit</a>
-                                        <button type="button" class="btn btn-danger">Delete</button>
+                                        <a href="{{route('users.show', $user->id)}}" type="button" class="btn btn-info">Show</a>
+                                        <a href="{{route('users.edit', $user->id)}}" type="button" class="btn btn-success">Edit</a>
+                                        <form action="{{route('users.destroy', $user->id)}}" onclick="ask{{$id}}(event)" id="miFormulario{{$id}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="sumbit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        <script>
+                                            function ask{{$id}}(event){
+                                                event.preventDefault();
+                                                Swal.fire({
+                                                    title: 'Eliminar registro',
+                                                    text: '¿Desea eliminar este registro?',
+                                                    icon: 'question',
+                                                    showDenyButton: true,
+                                                    confirmButtonText: 'Eliminar',
+                                                    confirmButtonColor: '#A5161D',
+                                                    denyButtonColor: '#270A0A',
+                                                    denyButtonText: 'Cancelar',
+                                                }).then((result) => {
+                                                    if (result.isConfirmed){
+                                                        var form = $('#miFormulario{{$id}}');
+                                                        form.submit();
+                                                    }
+                                                })
+                                            }
+                                        </script>
                                     </div>
                                 </td>
                             </tr>

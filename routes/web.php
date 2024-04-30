@@ -23,3 +23,4 @@ Route::get('/users/{id}',[UserController::class,'show'])->name('users.show')->mi
 Route::get('/users/{id}/update',[UserController::class,'edit'])->name('users.edit')->middleware('auth');
 //put es para actualizar datos
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');

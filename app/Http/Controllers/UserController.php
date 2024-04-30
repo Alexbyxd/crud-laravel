@@ -54,8 +54,10 @@ class UserController extends Controller
         $user->password = $request->password;
 
         $user->save();
-        //para despues de registrar voler a una pagina en especifico usar
-        return redirect()->route('users.index');
+        //para despues de registrar volver a una pagina en especifico usar
+        return redirect()->route('users.index')
+                    -> with('confirmation','Se registro al usuario correctamente')
+                    -> with('icon', 'success');
     }
 
     /**
@@ -97,14 +99,19 @@ class UserController extends Controller
         $user->password = $request->password;
         $user -> save();
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')
+                    ->with('confirmation', 'Se actualizo al usuario correctamente')
+                    ->with('icon', 'success');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect()->route('users.index')
+                    ->with('mensaje', 'Se elimino al usuario correctamente')
+                    ->with('icon', 'question');
     }
 }
