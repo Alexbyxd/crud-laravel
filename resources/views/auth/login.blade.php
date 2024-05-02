@@ -14,10 +14,20 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
 </head>
-<body class="hold-transition login-page">
+<style>
+    @font-face{
+        font-family: 'BardstownDemoRegular';
+        src: url('{{asset('fonts/BardstownDemoRegular.ttf')}}')
+    }
+    .titulo{
+        font-family: 'BardstownDemoRegular';
+        color: white
+    }
+</style>
+<body class="hold-transition login-page" style="background: url('{{asset('images/20230906214612246.jpg')}}'); background-repeat:no-repeat;background-size: 100vw 100vh; z-index: -3; background-attachment:fixed">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>ALEXBY</b>xd</a>
+    <a style="color: white;" href="../../index2.html"><b class="titulo">ALEXBY</b>xd</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
