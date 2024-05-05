@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
+                        <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas"><i class="bi bi-people"></i></i>
                                 <p>
@@ -128,6 +128,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('my_unit.index')}}" class="nav-link active">
+                                <i class="nav-icon fas"><i class="bi bi-folder-plus"></i></i>
+                                <p>
+                                    Mi Unidad
+                                    
+                                </p>
+                            </a>
                         </li>
 
                         @guest
@@ -166,12 +176,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @if ($message = Session::get('mensaje') && $icon = Session::get('icon'))
+            <br>
+            @if (($message = Session::get('confirmation')) && ($icon = Session::get('icon')))
             <script>
                 Swal.fire({
-                    title: "Mensaje",
-                    text: "{{$message}}",
-                    icon: "{{$icon}}"
+                    position: "center",
+                    icon:"{{$icon}}",
+                    title:"{{$message}}",
+                    showConfirmButton: false,
+                    timer:2000
                 });
             </script>
             @endif

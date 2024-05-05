@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -113,5 +113,36 @@ class UserController extends Controller
         return redirect()->route('users.index')
                     ->with('mensaje', 'Se elimino al usuario correctamente')
                     ->with('icon', 'question');
+    }
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function register_create(Request $request)
+    {
+        //con request leemos los datos que vienen del formulario
+        //estamos validando la informacion que viene del formulario
+        $request->validate([
+            'name' => 'required|max:100', //required significa que no puede estar vacio
+            'email' => 'required|unique:users', //valida si un email es unico en la tabla users
+            'password' => 'required|confirmed', //valida la contraseña y si se confirma
+        ]);
+        //guardamos los datos en la base de datos
+        //tiene que crear un nuevo usuario desde el modelo
+        //y poner todos los datos que vienen del formulario
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+
+        $user->save();
+        // despues de guardar se autentifique con el login
+        Auth::login($user);
+
+        //para despues de registrar volver a una pagina en especifico usar
+        return redirect('/')
+        ->with('confirmation', 'Bienvenido al sistema')
+        ->with('icon', 'success');
     }
 }
