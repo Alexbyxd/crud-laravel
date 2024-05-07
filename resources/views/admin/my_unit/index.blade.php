@@ -24,7 +24,7 @@
                             </div>
                             <div class="modal-body">
 
-                                <form action="{{route('my_unit.create')}}" method="POST">
+                                <form action="{{ route('my_unit.create') }}" method="POST">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
@@ -43,5 +43,24 @@
                 </div>
             </ol>
         </div>
+    </div>
+    <hr>
+    <h5>Carpetas</h5>
+    <div class="row">
+        @forelse ($folders as $folder)
+        <div class="col-md-3 col-sm-6 col-12">
+            <a href="{{route('my_unit.folder',$folder->id)}}" style="color: black">
+                <div class="info-box">
+                    <span class="info-box-icon bg-secondary"><i class="far"><i class="bi bi-folder"></i></i></span>
+                    <div class="info-box-content">
+                        <p>{{$folder->name}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @empty
+            <h3>No existe ninguna carpeta</h3>
+        @endforelse
+        
     </div>
 @endsection

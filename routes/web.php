@@ -32,3 +32,4 @@ Route::post('/register', [UserController::class, 'register_create'])->name('regi
 
 Route::get('/my_unit',[FolderController::class,'index'])->name('my_unit.index')->middleware('auth');
 Route::post('/my_unit',[FolderController::class,'store'])->name('my_unit.create')->middleware('auth');
+Route::get('/my_unit/folder/{id}', [FolderController::class,'show'])->name('my_unit.folder')->middleware('auth');

@@ -12,7 +12,8 @@ class FolderController extends Controller
      */
     public function index()
     {
-        return view('admin.my_unit.index');
+        $folders = Folder::all();
+        return view('admin.my_unit.index', compact('folders'));
     }
 
     /**
@@ -49,9 +50,10 @@ class FolderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $folder = Folder::find($id);
+        return view('admin.my_unit.show',compact('folder'));
     }
 
     /**

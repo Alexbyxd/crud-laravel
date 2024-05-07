@@ -185,7 +185,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     title:"{{$message}}",
                     showConfirmButton: false,
                     timer:2000
-                });
+                }); 
             </script>
             @endif
             
